@@ -1,0 +1,15 @@
+
+# Elastic Beanstalk Files
+.DS_Store
+.aws/
+configure.sh
+ecclipublickey
+logging.conf
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+# Elastic Beanstalk Files
+/venv
+__pycache__
+.idea/
+

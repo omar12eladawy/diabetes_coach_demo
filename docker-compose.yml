@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+  app:
+    build: .
+#    command: python api.py
+    command: gunicorn -b 0.0.0.0:5000 api:app --timeout 5000
+    ports:
+      - 5000:5000
+    volumes:
+      - .:/python-flask
