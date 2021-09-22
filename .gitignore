@@ -2,6 +2,7 @@
 # Elastic Beanstalk Files
 .DS_Store
 .aws/
+Key.json
 configure.sh
 ecclipublickey
 logging.conf
