@@ -1,61 +1,70 @@
+from .trends import Trends
+from .responses import ResponseFactory
+from .evaltrendsfactory import EvalTrendsFactory
+import numpy as np
 
 
-state_before = {
-    'case_00': {
-        'increase in glucsoe expected': 0,
-        'decrease in glucose expected': 1,
-    },
-    'case_01': {
-        'increase in glucsoe expected': 0,
-        'decrease in glucose expected': 1,
-    },
-    'case_02': {
-        'increase in glucsoe expected': 0,
-        'decrease in glucose expected': 1,
-    },
-    'case_03': {
-        'increase in glucsoe expected': 0,
-        'decrease in glucose expected': 1,
-    },
-    'case_04': {
-        'increase in glucsoe expected': 0,
-        'decrease in glucose expected': 1,
-    },
-    'case_05': {
-        'increase in glucsoe expected': 0,
-        'decrease in glucose expected': 1,
-    },
-    'case_06': {
-        'increase in glucsoe expected': 0,
-        'decrease in glucose expected': 1,
-    }
-}
+trends = Trends()
+evalTrendsFactory = EvalTrendsFactory()
 
-state_during = {}
-
-state_after = {}
-
-all_outcomes = [state_before, state_during, state_after]
 
 class DecisionTree():
-    def __init__(self, exercise_level: str, outcomes: dict):
+    def __init__(self, exercise_level: str):
         self.exercise_level = exercise_level
-        self.outcomes = outcomes
-        self.glu_ranges = 0
-
+        self.state = 'before'
+        self.glu_ranges = [(np.inf, 270),
+                           (np.inf, 270),
+                           (270, 181),
+                           (180, 126),
+                           (125, 90),
+                           (89, 70),
+                           (70, np.ninf)]
     def set_ranges(self):
         if self.exercise_level == 'ex_1':
-            # self.glu_ranges = [ddddd]
+            self.glu_ranges = [(np.inf, 270),
+                               (np.inf, 270),
+                               (270, 181),
+                               (180, 126),
+                               (125, 90),
+                               (89, 70),
+                               (70, np.ninf)]
             print('exercise level now set to ex_1')
-            raise NotImplementedError
+
         elif self.exercise_level == 'ex_2':
-            raise NotImplementedError
+            self.glu_ranges = [(np.inf, 270),
+                               (np.inf, 270),
+                               (270, 199),
+                               (198, 145),
+                               (144, 90),
+                               (89, 70),
+                               (70, np.ninf)]
+            print('exercise level now set to ex_1')
+
         elif self.exercise_level == 'ex_3':
-            raise NotImplementedError
+            self.glu_ranges = [(np.inf, 270),
+                               (np.inf, 270),
+                               (270, 217),
+                               (216, 162),
+                               (161, 90),
+                               (89, 70),
+                               (70, np.ninf)]
+            print('exercise level now set to ex_1')
+
+    def set_state(self, new_state):
+        self.state = new_state
 
     def set_exercise_level(self, new_exercise_level):
         self.exercise_level = new_exercise_level
         self.set_ranges()
 
-    def eval(self, current_glucose):
-        pass
+    def eval_glucose(self, glucose_level, trend):
+        eval_func = evalTrendsFactory.get_eval_func(self.state)
+        case_level = -1
+        for lower_bound, upper_bound, i in enumerate(self.glu_ranges):
+            if glucose_level >= lower_bound and glucose_level <= upper_bound:
+                case_level = i
+        eval_func(case_level, trend)
+
+
+if __name__ == '__main__':
+    print('wtf')
