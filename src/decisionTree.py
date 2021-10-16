@@ -1,6 +1,6 @@
-from .trends import Trends
-from .responses import ResponseFactory
-from .evaltrendsfactory import EvalTrendsFactory
+from src.trends import Trends
+from responses import ResponseFactory
+from evaltrendsfactory import EvalTrendsFactory
 import numpy as np
 
 
@@ -18,7 +18,7 @@ class DecisionTree():
                            (180, 126),
                            (125, 90),
                            (89, 70),
-                           (70, np.ninf)]
+                           (70, np.NINF)]
     def set_ranges(self):
         if self.exercise_level == 'ex_1':
             self.glu_ranges = [(np.inf, 270),
@@ -27,7 +27,7 @@ class DecisionTree():
                                (180, 126),
                                (125, 90),
                                (89, 70),
-                               (70, np.ninf)]
+                               (70, np.NINF)]
             print('exercise level now set to ex_1')
 
         elif self.exercise_level == 'ex_2':
@@ -37,7 +37,7 @@ class DecisionTree():
                                (198, 145),
                                (144, 90),
                                (89, 70),
-                               (70, np.ninf)]
+                               (70, np.NINF)]
             print('exercise level now set to ex_1')
 
         elif self.exercise_level == 'ex_3':
@@ -47,7 +47,7 @@ class DecisionTree():
                                (216, 162),
                                (161, 90),
                                (89, 70),
-                               (70, np.ninf)]
+                               (70, np.NINF)]
             print('exercise level now set to ex_1')
 
     def set_state(self, new_state):
@@ -60,11 +60,21 @@ class DecisionTree():
     def eval_glucose(self, glucose_level, trend):
         eval_func = evalTrendsFactory.get_eval_func(self.state)
         case_level = -1
-        for lower_bound, upper_bound, i in enumerate(self.glu_ranges):
-            if glucose_level >= lower_bound and glucose_level <= upper_bound:
+        for i, bounds in enumerate(self.glu_ranges):
+            if glucose_level >= bounds[1] and glucose_level <= bounds[0]:
                 case_level = i
-        eval_func(case_level, trend)
+                print('case level', i)
+        res = eval_func(case_level, trend)
+        return res
 
 
 if __name__ == '__main__':
-    print('wtf')
+    dt = DecisionTree('ex_1')
+    res = dt.eval_glucose(270, trends.UP)
+    print('#'*1000,'\n')
+    print('-'*100)
+    print('|' ,'='*10, 'Here are the result of your Evaluation','='*10)
+
+    print('|' , 'Expecting Glucose increase =>', res['case_increase'])
+    print('|' ,'Expecting Glucose decrease =>', res['case_decrease'])
+    print('-'*100)

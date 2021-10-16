@@ -1,6 +1,6 @@
 import logging
 
-from .responses import ResponseFactory, ResponseEnum
+from responses import ResponseFactory, ResponseEnum
 from trends import Trends
 
 res_enum = ResponseEnum()
@@ -12,6 +12,7 @@ class EvalTrendsFactory():
         print('Eval Trends Interface created')
 
     def eval_trends_before(self, case_level, trend):
+        print('created before eval trends with case level', case_level)
         res_dict = res_factory.get_reponsedict('before')
         if case_level == 0:
             return res_dict[res_enum.RESPONSE_0]
@@ -80,10 +81,10 @@ class EvalTrendsFactory():
             elif trend == trend_enum.DOWN:
                 return res_dict[res_enum.RESPONSE_17]
 
-        elif case_level == 6:
-            return res_dict[res_enum.RESPONSE_18]
-        else:
-            raise AssertionError
+            elif case_level == 6:
+                return res_dict[res_enum.RESPONSE_18]
+            elif case_level == -1:
+                raise AssertionError
 
     def eval_trends_during(self, case_level, trend):
         res_dict = res_factory.get_reponsedict('during')
@@ -102,7 +103,7 @@ class EvalTrendsFactory():
         elif case_level == 6:
             pass
         else:
-                raise AssertionError
+            raise AssertionError
 
     def eval_trends_after(self, case_level, trend):
         res_dict = res_factory.get_reponsedict('after')
@@ -125,6 +126,7 @@ class EvalTrendsFactory():
 
     def get_eval_func(self, state):
         if state == 'before':
+            print('not in get eval func')
             return self.eval_trends_before
         elif state == 'during':
             pass
