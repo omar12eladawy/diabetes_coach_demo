@@ -1,7 +1,7 @@
 import logging
 
-from responses import ResponseFactory, ResponseEnum
-from trends import Trends
+from src.responses import ResponseFactory, ResponseEnum
+from src.trends import Trends
 
 res_enum = ResponseEnum()
 res_factory = ResponseFactory()
@@ -81,10 +81,11 @@ class EvalTrendsFactory():
             elif trend == trend_enum.DOWN:
                 return res_dict[res_enum.RESPONSE_17]
 
-            elif case_level == 6:
-                return res_dict[res_enum.RESPONSE_18]
-            elif case_level == -1:
-                raise AssertionError
+        elif case_level == 6:
+            return res_dict[res_enum.RESPONSE_18]
+
+        elif case_level == -1:
+            raise AssertionError
 
     def eval_trends_during(self, case_level, trend):
         res_dict = res_factory.get_reponsedict('during')
@@ -126,7 +127,6 @@ class EvalTrendsFactory():
 
     def get_eval_func(self, state):
         if state == 'before':
-            print('not in get eval func')
             return self.eval_trends_before
         elif state == 'during':
             pass

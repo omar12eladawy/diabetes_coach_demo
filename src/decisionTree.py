@@ -1,6 +1,5 @@
 from src.trends import Trends
-from responses import ResponseFactory
-from evaltrendsfactory import EvalTrendsFactory
+from src.evaltrendsfactory import EvalTrendsFactory
 import numpy as np
 
 
@@ -18,7 +17,7 @@ class DecisionTree():
                            (180, 126),
                            (125, 90),
                            (89, 70),
-                           (70, np.NINF)]
+                           (69, np.NINF)]
     def set_ranges(self):
         if self.exercise_level == 'ex_1':
             self.glu_ranges = [(np.inf, 270),
