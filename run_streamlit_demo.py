@@ -8,15 +8,14 @@ from src.decisionTree import DecisionTree
 from aenum import enum as Enum
 from src.trends import Trends
 
-
 class Exercise_Level(Enum):
     EX_1 = 'Level 1 - High Hypo risk'
     EX_2 = 'Level 2 - Medium Hypo risk'
     EX_3 = 'Level 3 - Low Hypo risk'
 
-
 ex_enum = Exercise_Level()
 trends_enum = Trends()
+dt = DecisionTree()
 st.title('Mediwell Demo board')
 
 with st.form(key="Form"):
@@ -26,16 +25,18 @@ with st.form(key="Form"):
 
     if exercise_level == ex_enum.EX_1:
         ex_level = 'ex_1'
+        print('ex_level = ', ex_level)
     elif exercise_level == ex_enum.EX_2:
         ex_level = 'ex_2'
+        print('ex_level = ', ex_level)
     elif exercise_level == ex_enum.EX_3:
         ex_level = 'ex_3'
+        print('ex_level = ', ex_level)
+
     else:
         raise AssertionError
-    # st.write('hello')
     # components.iframe("https://giphy.com/gifs/reaction-wwe-wrestling-UiBmJv6Hh6FfW/fullscreen")
 
-    # st.write('What is your current glucose level in mg/dl')
     current_glucose = st.number_input('What is your current glucose value in mg/dl')
 
     current_trend = st.radio(
@@ -48,19 +49,17 @@ with st.form(key="Form"):
     )
 
     submitted = st.form_submit_button()
+    dt.set_exercise_level(ex_level)
 
-# st.button('Are you ready for your training')
-dt = DecisionTree('ex_1')
-res = dt.eval_glucose(current_glucose, current_trend)
-new_line = '\n'
 if submitted:
-    dt = DecisionTree('ex_1')
     res = dt.eval_glucose(current_glucose, current_trend)
     with st.spinner("🤓 Getting Recommendation"):
         time.sleep(1)
+
     col1, col2 = st.columns(2)
     col1.subheader('Expecting increase in glucose?')
     col2.subheader('Expecting decrease in glucose?')
+
     if res['color'] == 'green':
         col1.success(
             f"➡️ {res['case_increase']}"

@@ -8,8 +8,8 @@ evalTrendsFactory = EvalTrendsFactory()
 
 
 class DecisionTree():
-    def __init__(self, exercise_level: str):
-        self.exercise_level = exercise_level
+    def __init__(self,):
+        self.exercise_level = 'ex_1'
         self.state = 'before'
         self.glu_ranges = [(np.inf, 270),
                            (np.inf, 270),
@@ -28,7 +28,6 @@ class DecisionTree():
                                (89, 70),
                                (70, np.NINF)]
             print('exercise level now set to ex_1')
-
         elif self.exercise_level == 'ex_2':
             self.glu_ranges = [(np.inf, 270),
                                (np.inf, 270),
@@ -37,7 +36,7 @@ class DecisionTree():
                                (144, 90),
                                (89, 70),
                                (70, np.NINF)]
-            print('exercise level now set to ex_1')
+            print('exercise level now set to ex_2')
 
         elif self.exercise_level == 'ex_3':
             self.glu_ranges = [(np.inf, 270),
@@ -47,7 +46,7 @@ class DecisionTree():
                                (161, 90),
                                (89, 70),
                                (70, np.NINF)]
-            print('exercise level now set to ex_1')
+            print('exercise level now set to ex_3')
 
     def set_state(self, new_state):
         self.state = new_state
@@ -62,7 +61,6 @@ class DecisionTree():
         for i, bounds in enumerate(self.glu_ranges):
             if glucose_level >= bounds[1] and glucose_level <= bounds[0]:
                 case_level = i
-                print('case level', i)
         res = eval_func(case_level, trend)
         return res
 
