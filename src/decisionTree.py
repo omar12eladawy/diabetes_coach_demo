@@ -66,7 +66,7 @@ class DecisionTree():
 
 
 if __name__ == '__main__':
-    dt = DecisionTree('ex_1')
+    dt = DecisionTree()
     res = dt.eval_glucose(270, trends.UP)
     print('#'*1000,'\n')
     print('-'*100)

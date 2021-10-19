@@ -1,11 +1,14 @@
 import time
 import os
 import streamlit as st
-import streamlit.components.v1 as components
 import numpy as np
 import pandas as pd
-from src.decisionTree import DecisionTree
+import streamlit.components.v1 as components
+
+from PIL import Image
 from aenum import enum as Enum
+
+from src.decisionTree import DecisionTree
 from src.trends import Trends
 
 class Exercise_Level(Enum):
@@ -16,6 +19,7 @@ class Exercise_Level(Enum):
 ex_enum = Exercise_Level()
 trends_enum = Trends()
 dt = DecisionTree()
+image = Image.open('Pre_ex.png')
 st.title('Mediwell Demo board')
 
 with st.form(key="Form"):
@@ -65,20 +69,24 @@ if submitted:
             f"➡️ {res['case_increase']}"
         )
         col2.success(
-            f" ➡️ {res['case_increase']}"
+            f" ➡️ {res['case_decrease']}"
         )
     elif res['color'] == 'yellow' or res['color'] == 'dark_yellow':
         col1.warning(
             f" ➡️ {res['case_increase']}"
         )
         col2.warning(
-            f" ➡️ {res['case_increase']}"
+            f" ➡️ {res['case_decrease']}"
         )
     elif res['color'] == 'red':
         col1.error(
             f" ➡️ {res['case_increase']}"
         )
         col2.error(
-            f" ➡️ {res['case_increase']}"
+            f" ➡️ {res['case_decrease']}"
         )
 
+
+# components.html("""<hr style="height:5px;border:none;color:#333;background-color:#333;" /> """)
+with st.sidebar.expander("See Reference Chart"):
+    st.image(image)
