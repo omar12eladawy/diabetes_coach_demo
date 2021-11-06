@@ -31,43 +31,85 @@ class ResponseFactory():
     def define_responses(self, state):
         if state == 'before':
             #Red Area
+            #todo get value of insulin correction from paper
             self.response_dict[self.response_enum.RESPONSE_0] = {
-                'case_increase': 'No Ex, consider insulin correction ',
-                'case_decrease': 'No Ex, consider insulin correction',
+                # 'case_increase': 'No Ex, consider insulin correction ',
+                'case_increase': None,
+                'case_decrease': {
+                    'text_AE': 'Not ready for Exercise.',
+                    'text_other': 'Not ready for Exercise.',
+                    'insulin_rec': 'Insulin Correction needed!',
+                    'insulin_rec': 'Insulin Correction needed!',
+                    'food_rec': None,
+                },
                 'color': 'red'
             }
 
             #Dark Yellow Area
             self.response_dict[self.response_enum.RESPONSE_1] = {
-                'case_increase': 'Consider Insulin Correction. Can start AE ',
-                'case_decrease': 'Consider Insulin Correction. Can start all Ex',
+                # 'case_increase': 'Can start AE ',
+                'case_decrease': {
+                    'text_AE': 'Can start exercise immediately ',
+                    'text_other': 'Follow the insulin recommendation before starting!',
+                    'insulin_rec': 'Consider Insulin Correction with 50% of the regular factor.',
+                    'insulin_rec': 'Consider Insulin Correction with 50% of the regular factor.',
+                    'food_rec': None,
+                },
                 'color': 'dark_yellow'
             }
             self.response_dict[self.response_enum.RESPONSE_2] = {
-                'case_increase': 'Consider Insulin Correction. Can start AE ',
-                'case_decrease': 'Consider Insulin Correction. Can start all Ex',
+                # 'case_increase': 'Can start AE ',
+                'case_decrease': {
+                    'text_AE': 'Can start exercise immediately ',
+                    'text_other': 'Follow the insulin recommendation before starting!',
+                    'insulin_rec': 'Consider Insulin Correction with 50% of the regular factor.',
+                    'insulin_rec': 'Consider Insulin Correction with 50% of the regular factor.',
+                    'food_rec': None
+                },
                 'color': 'dark_yellow'
             }
             self.response_dict[self.response_enum.RESPONSE_3] = {
-                'case_increase': 'Can start all Ex',
-                'case_decrease': 'Can start all Ex',
+                # 'case_increase': 'Can start all Ex',
+                'case_decrease': {
+                    'text_AE': 'Can start all Ex',
+                    'text_other': 'Can start all Ex',
+                    'insulin_rec': None,
+                    'insulin_rec': None,
+                    'food_rec': None
+                },
                 'color': 'dark_yellow'
             }
 
             #Yellow Area
             self.response_dict[self.response_enum.RESPONSE_4] = {
-                'case_increase': 'Can start AE. Consider insulin correction for RT, HIIT',
-                'case_decrease': 'Can start AE. Consider insulin correction for RT, HIIT',
+                # 'case_increase': 'Can start AE. Consider insulin correction for RT, HIIT',
+                # 'case_decrease': 'Can start AE. Consider insulin correction for RT, HIIT',
+                # 'insulin_rec': None,
+                # 'food_rec': None,
+                # 'color': 'yellow'
+                'case_decrease': {
+                    'text_AE': 'Can start exercise!',
+                    'text_other': 'Can start exercise!',
+                    'insulin_rec': None,
+                    'insulin_rec': None,
+                    'food_rec': None
+                },
                 'color': 'yellow'
             }
+
+            #todo: refactor the dict.
             self.response_dict[self.response_enum.RESPONSE_5] = {
                 'case_increase': 'Can start all EX. Consider insulin correction for RT, HIIT',
                 'case_decrease': 'Can start all EX',
+                'insulin_rec': None,
+                'food_rec': None,
                 'color': 'yellow'
             }
             self.response_dict[self.response_enum.RESPONSE_6] = {
                 'case_increase': 'Can start all Ex',
                 'case_decrease': 'Can start all Ex',
+                'insulin_rec': None,
+                'food_rec': None,
                 'color': 'yellow'
             }
 
@@ -75,11 +117,15 @@ class ResponseFactory():
             self.response_dict[self.response_enum.RESPONSE_7] = {
                 'case_increase': 'Can start all Ex',
                 'case_decrease': 'Can start all Ex',
+                'insulin_rec': None,
+                'food_rec': None,
                 'color': 'green'
             }
             self.response_dict[self.response_enum.RESPONSE_8] = {
                 'case_increase': 'Can start all Ex',
                 'case_decrease': 'Can start all Ex. 15g CHO',
+                'insulin_rec': None,
+                'food_rec': None,
                 'color': 'green'
             }
 
@@ -87,21 +133,29 @@ class ResponseFactory():
             self.response_dict[self.response_enum.RESPONSE_9] = {
                 'case_increase': 'Can start all Ex',
                 'case_decrease': 'Can start all Ex. 15 g CHO',
+                'insulin_rec': None,
+                'food_rec': None,
                 'color': 'yellow'
             }
             self.response_dict[self.response_enum.RESPONSE_10] = {
                 'case_increase': 'Can start all Ex. 10 g CHO',
                 'case_decrease': 'Can start all Ex. 20 g CHO',
+                'insulin_rec': None,
+                'food_rec': None,
                 'color': 'yellow'
             }
             self.response_dict[self.response_enum.RESPONSE_11] = {
                 'case_increase': 'Delay all Ex. 15 g CHO',
                 'case_decrease': 'Delay all Ex. 25 g CHO',
+                'insulin_rec': None,
+                'food_rec': None,
                 'color': 'yellow'
             }
             self.response_dict[self.response_enum.RESPONSE_12] = {
                 'case_increase': 'Delay all Ex. 20 g CHO',
                 'case_decrease': 'Delay all Ex. 30 g CHO',
+                'insulin_rec': None,
+                'food_rec': None,
                 'color': 'yellow'
             }
 
@@ -109,6 +163,8 @@ class ResponseFactory():
             self.response_dict[self.response_enum.RESPONSE_13] = {
                 'case_increase': 'Can start all Ex. 10 g CHO',
                 'case_decrease': 'Delay all Ex. 20 g CHO',
+                'insulin_rec': None,
+                'food_rec': None,
                 'color': 'dark_yellow'
             }
             self.response_dict[self.response_enum.RESPONSE_14] = {
@@ -119,16 +175,22 @@ class ResponseFactory():
             self.response_dict[self.response_enum.RESPONSE_15] = {
                 'case_increase': 'Delay all Ex. 20 g CHO',
                 'case_decrease': 'Delay all Ex. 30 g CHO',
+                'insulin_rec': None,
+                'food_rec': None,
                 'color': 'dark_yellow'
             }
             self.response_dict[self.response_enum.RESPONSE_16] = {
                 'case_increase': 'Delay all Ex. 25 g CHO',
                 'case_decrease': 'Delay all Ex. 35 g CHO',
+                'insulin_rec': None,
+                'food_rec': None,
                 'color': 'dark_yellow'
             }
             self.response_dict[self.response_enum.RESPONSE_17] = {
                 'case_increase': 'Individual amount CHO Ingestion. Delay all Ex',
                 'case_decrease': 'Individual amount CHO Ingestion. Delay all Ex',
+                'insulin_rec': None,
+                'food_rec': None,
                 'color': 'dark_yellow'
             }
 
@@ -136,6 +198,8 @@ class ResponseFactory():
             self.response_dict[self.response_enum.RESPONSE_18] = {
                 'case_increase': 'Individual amount CHO Ingestion. Delay all Ex',
                 'case_decrease': 'Individual amount CHO Ingestion. Delay all Ex',
+                'insulin_rec': None,
+                'food_rec': None,
                 'color': 'red'
             }
 
