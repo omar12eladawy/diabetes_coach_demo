@@ -1,20 +1,24 @@
-from flask import Flask, render_template
-import os
-import firebase_admin
-from firebase_admin import credentials
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+from src.decisionTree import DecisionTree
 
 
-app = Flask(__name__, template_folder='')
+app = FastAPI()
+dt = DecisionTree()
+
+class RecommendationRequest(BaseModel):
+    glucose_value: float
+    exercise_level: str
+    glucose_trend: str
+    is_Aerobic: bool
 
 
-cred = credentials.Certificate("Key.json")
-firebase_admin.initialize_app(cred)
+@app.post("/getRecommendation")
+async def root(request: RecommendationRequest):
+    print()
+    dt.set_exercise_level(request.exercise_level)
 
 
-@app.route('/')
-def hello():
-    return render_template('home.html')
-
-if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', debug=False, port=port)
+@app.get("/health")
+async def root():
+    return {"message": "App sate is healthy"}
