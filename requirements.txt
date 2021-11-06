@@ -1,8 +1,10 @@
 aenum==3.1.0
 alembic==1.7.4
 altair==4.1.0
+anyio==3.3.4
 appnope==0.1.2
 argon2-cffi==21.1.0
+asgiref==3.4.1
 asn1crypto==1.4.0
 astor==0.8.1
 attrs==21.2.0
@@ -20,6 +22,7 @@ debugpy==1.5.0
 decorator==5.1.0
 defusedxml==0.7.1
 entrypoints==0.3
+fastapi==0.70.0
 firebase-admin==5.0.3
 Flask==2.0.2
 Flask-Cors==3.0.10
@@ -41,6 +44,7 @@ googleapis-common-protos==1.53.0
 greenlet==1.1.2
 grpcio==1.41.0
 gunicorn==20.1.0
+h11==0.12.0
 httplib2==0.20.1
 idna==3.3
 ipykernel==6.4.1
@@ -83,6 +87,7 @@ pyarrow==5.0.0
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 pycparser==2.20
+pydantic==1.8.2
 pydeck==0.7.0
 Pygments==2.10.0
 pyparsing==2.4.7
@@ -96,8 +101,10 @@ scramp==1.4.1
 Send2Trash==1.8.0
 six==1.16.0
 smmap==4.0.0
+sniffio==1.2.0
 SQLAlchemy==1.4.25
 SQLAlchemy-Utils==0.33.6
+starlette==0.16.0
 streamlit==1.0.0
 terminado==0.12.1
 testing.common.database==2.0.3
@@ -111,6 +118,7 @@ typing-extensions==3.10.0.2
 tzlocal==3.0
 uritemplate==4.1.1
 urllib3==1.26.7
+uvicorn==0.15.0
 validators==0.18.2
 wcwidth==0.2.5
 webencodings==0.5.1
